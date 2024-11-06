@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{7215c460-63c0-43f6-bf3b-05c3e4188ed7}</ProjectGuid>
-    <RootNamespace>November42024COSC1437002</RootNamespace>
+    <ProjectGuid>{ad8ce81c-459d-44e7-92d8-21f157fcd34b}</ProjectGuid>
+    <RootNamespace>Nov6moreoperatoroverloadingandTEMPLATES</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,10 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="November4_2024-COSC1437.002.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Header.h" />
+    <ClCompile Include="Nov6-more operator overloading - and TEMPLATES.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,7 +1,13 @@
 // November4_2024-COSC1437.002.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
+//#define DEBUG_MODE
+
 #include <iostream>
+
+//#include"Header.h"
+//
+//#include"Header.h"
 
 using std::cout; 
 using std::string; 
@@ -34,6 +40,12 @@ public:
 		return resultingPlanet; 
 
 	}
+
+	void demoWhatThisIs()
+	{
+		cout << "This is " << this << "\n";
+
+	}
 };
 
 class Person
@@ -64,6 +76,32 @@ class Person
 
 int main()
 {
+	//friend 
+
+
+	Planet mySpecialPlanet; 
+	mySpecialPlanet.demoWhatThisIs(); 
+	cout << "Address of mySpecialPlanet is: " << &mySpecialPlanet << "\n";
+	system("pause"); 
+
+
+//#ifdef DEBUG_MODE
+//	cout << "We are debugging\n";
+//#endif 
+
+	//1) overload some operators
+	//2) use TEMPLATES 
+
+	int a = 12; 
+	cout << a + a << "\n";
+	//+ acts as "normal" addition operator here 
+
+	string b = "word"; 
+	//++b;
+
+	cout << b + b << "\n"; //+ is a "polymorphic operator"!
+	//+ acts as "string concatenation operator" here 
+
 	Planet ourPlanet{ "Earth", 6 * pow(10, 24)};
 
 	Planet otherPlanet{ "Saturn", 6 * pow(10, 26) };
