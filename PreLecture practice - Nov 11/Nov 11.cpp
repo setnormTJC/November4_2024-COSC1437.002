@@ -75,33 +75,39 @@ public:
 			cout << listOfThings[i] << "\n";
 		}
 	}
+	//at (index)
 	//next time... an overloaded subscript operator 
 	T& operator [] (int index)
 	{
 		return listOfThings[index]; 
 	}
 
+	//More "typical" addition definition - perhaps - adds given value to every element in array 
+	void operator + (T thingToAdd)
+	{
+		for (int i = 0; i < MAX_NUMBER_ELEMENTS; ++i)
+		{
+			listOfThings[i] += thingToAdd;
+		}
+	}
 
-	//CustomStaticArray<T> operator + (const CustomStaticArray<T> other)
-	//{
-	//	CustomStaticArray<T> newArray; 
+	/*CONCATENATION - Restricted in assuming that the two operands (arrays) have the same number of elements*/
+	CustomStaticArray<T, MAX_NUMBER_ELEMENTS * 2> operator + (CustomStaticArray<T, MAX_NUMBER_ELEMENTS>& otherArray)
+	{
+		CustomStaticArray<T, MAX_NUMBER_ELEMENTS * 2> newArray; 
 
+		for (int i = 0; i < MAX_NUMBER_ELEMENTS; ++i)
+		{
+			newArray.insert(i, this->listOfThings[i]);
+		}
 
-	//	for (int i = 0; i < MAX_NUMBER_ELEMENTS/2; ++i)
-	//	{
-	//		newArray.operator[](i) = this->operator[](i); //this copies the first
-	//		//newArray[i] -> same as newArray.operator[](i)
-	//	}
+		for (int i = MAX_NUMBER_ELEMENTS; i < MAX_NUMBER_ELEMENTS * 2; ++i)
+		{	
+			newArray.insert(i, otherArray[i - MAX_NUMBER_ELEMENTS]);
+		}
 
-	//	//for (int i = MAX_NUMBER_ELEMENTS / 2; i < MAX_NUMBER_ELEMENTS; ++i)
-	//	//{
-	//	//	newArray[i] = other.listOfThings
-	//	//}
-	//}
-	//ostream& operator << (ostream& os, const CustomStaticArray<T>& csa)
-	//{
-
-	//}
+		return newArray; 
+	}
 
 };
 
@@ -148,8 +154,9 @@ public:
 
 int main()
 {
+	//int a = -3
 	//Car carObject{ 1, 99'999 };
-	////c++; //really?
+	////carObject++; //error - really?
 	//++carObject; 
 
 	////let's write the car info to an OUTPUT file (not cout) 
@@ -173,20 +180,31 @@ int main()
 	listOfWords.insert(0, "alpha");
 
 	//listOfNames.insert(199, "zeta"); 
-	listOfWords[1] = "beta";
+	listOfWords[1] = "beta"; //this will call the overloaded subscript operator 
 
 	listOfWords.print(); 
 
-	CustomStaticArray <string, 10> 	anotherListOfWords;
+	CustomStaticArray <string, 5> 	anotherListOfWords;
 	anotherListOfWords[0] = "dog"; 
 	anotherListOfWords[1] = "zebra";
 
 	anotherListOfWords.print(); 
-	//CustomStaticArray<string> joinedListOfWords = listOfWords + anotherListOfWords; 
-	//come back to list concatenation later ...
+	CustomStaticArray<string, 10> joinedListOfWords = listOfWords + anotherListOfWords; 
 
-	//how to write array object out to file?  //come back to this later
+	cout << "Joined array:\n";
+	joinedListOfWords.print(); 
 
+	//demoing the SECOND overload of the addition operator: 
+	string thingToAdd = "abcdef";
+	joinedListOfWords + thingToAdd;
+	//alterantive syntax: 
+	//joinedListOfWords.operator+()
+	//joinedListOfWords.operator+(thingToAdd);
+
+
+	cout << "\n\nAfter \"adding\" " << thingToAdd << "\n";
+
+	joinedListOfWords.print(); 
 
 	//std::vector<int> nums; 
 	//CustomStaticArray<string> csa; 
@@ -195,7 +213,7 @@ int main()
 	////cout << "Address of data at given index (within MAIN): " << &(csa[0]) << "\n";
 	//cout << csa.operator[](0) << "\n";
 	
-	//int a{}; //new C++ style of initiliazing
+	//int a{}; //new C++ style of initializing
 	//cout << a << "\n";
 
 
