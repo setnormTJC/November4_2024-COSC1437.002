@@ -126,45 +126,47 @@ public:
 		//return //ex: suppose array = {1} and searchValue = 10; 
 	}
 
+	/*this algorithm DOES ASSUME that the list is SORTED (in ascending order)*/
 	int myBinarySearch(int valueToSearchFor)
 	{
-		//to be filled out soon ...
-
 
 		int lowIndex = 0; 
 		int highIndex = N - 1; 
 
-		int middleIndex = (highIndex - lowIndex ) / 2; //be wary of array parity (eveness or oddness)
-
+		int currentSearchIndex = (highIndex - lowIndex ) / 2; //be wary of array parity (eveness or oddness
 
 		bool found = false; 
 		while (!found)
 		{
-			if (m_nums[middleIndex] == valueToSearchFor)
+			currentSearchIndex = lowIndex + (highIndex - lowIndex) / 2; 
+
+			if (m_nums[currentSearchIndex] == valueToSearchFor)
 			{
 				//{ 1, 2, 3, 4, 5, 6, 7, 8, 9 }
 				found = true; 
 
 			}
-			else if (m_nums[middleIndex] > valueToSearchFor)
+			else if (m_nums[currentSearchIndex]  > valueToSearchFor)
 			{
 				cout << "Middle index value was too high!\n";
-				highIndex = middleIndex - 1; 
+				highIndex = currentSearchIndex -1; 
 
 			}
 
 			else //m_nums[mid> < valueToSearchFor
 			{
 				cout << "MIddle index value was too LOW\n";
-				lowIndex = middleIndex + 1; 
+				lowIndex = currentSearchIndex + 1; 
 			}
 			//2^20 
 		}
 
 		if (found)
 		{
-			return middleIndex; 
+			return currentSearchIndex; 
 		}
+
+		
 	}
 }; //end StaticIntegerArray class def. 
 
@@ -187,9 +189,9 @@ int main()
 
 	for (int i = 0; i < N; ++i)
 	{
-		nums.insert(i, rand() % N); 
+		nums.insert(i, pow(2, i)); //an homage to the fact that binary search complexity O(log2(N))
 	}
-	nums.in_place_ascending_sort(); 
+	//nums.in_place_ascending_sort(); 
 
 	nums.print(); //{1, 2, 3, 4, 5, 6, 7, 8, 9}
 	//recall! I tried to use nums.print() in the member function above!
@@ -200,15 +202,15 @@ int main()
 	while (true)
 	{
 		cout << "Enter a number - we'll check if it is in the array:\n";
-		int numberToSearchFor;
-		std::cin >> numberToSearchFor; //5 
+		int numberToSearchFor  = 64;
+		//std::cin >> numberToSearchFor; //5 
 		//{ 5, 5, 5 5, 5 };
-
 
 		//cout << "That number was? found at index: " << nums.mySequentialSearch(numberToSearchFor) << "\n";
 
 
-		cout << "That number was? found at index: " << nums.myBinarySearch(numberToSearchFor) << "\n";
+		cout << "That number " << numberToSearchFor << "was (was not?) found at index : " 
+			<< nums.myBinarySearch(numberToSearchFor) << "\n";
 
 	}
 
