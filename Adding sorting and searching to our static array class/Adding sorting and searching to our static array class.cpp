@@ -136,7 +136,7 @@ public:
 		int currentSearchIndex = (highIndex - lowIndex ) / 2; //be wary of array parity (eveness or oddness
 
 		bool found = false; 
-		while (!found)
+		while ((lowIndex <= highIndex) && !found)
 		{
 			currentSearchIndex = lowIndex + (highIndex - lowIndex) / 2; 
 
@@ -166,6 +166,12 @@ public:
 			return currentSearchIndex; 
 		}
 
+		else
+		{
+			cout << "The element " << valueToSearchFor << " was NOT found :(\n";
+			return -1; 
+		}
+
 		
 	}
 }; //end StaticIntegerArray class def. 
@@ -182,16 +188,17 @@ void printNums(const std::vector<int>& nums)
 int main()
 {
 
-	const int N = 10; //this is getting at "Big O notation" 
+	const int N = 100; //this is getting at "Big O notation" 
 	StaticIntegerArray<N> nums; 
 
 	srand(time(0));
-
+	
 	for (int i = 0; i < N; ++i)
 	{
-		nums.insert(i, pow(2, i)); //an homage to the fact that binary search complexity O(log2(N))
+		//nums.insert(i, pow(2, i)); //an homage to the fact that binary search complexity O(log2(N))
+		nums.insert(i, rand() % 255);
 	}
-	//nums.in_place_ascending_sort(); 
+	nums.in_place_ascending_sort(); 
 
 	nums.print(); //{1, 2, 3, 4, 5, 6, 7, 8, 9}
 	//recall! I tried to use nums.print() in the member function above!
@@ -202,16 +209,20 @@ int main()
 	while (true)
 	{
 		cout << "Enter a number - we'll check if it is in the array:\n";
-		int numberToSearchFor  = 64;
-		//std::cin >> numberToSearchFor; //5 
+		int numberToSearchFor;// = 61233433;
+		std::cin >> numberToSearchFor; //5 
 		//{ 5, 5, 5 5, 5 };
 
 		//cout << "That number was? found at index: " << nums.mySequentialSearch(numberToSearchFor) << "\n";
 
+		cout << "That number " << numberToSearchFor << "was (was not?) found by SEQUENTIAL SEARCH at index : "
+			<< nums.mySequentialSearch(numberToSearchFor) << "\n";
 
-		cout << "That number " << numberToSearchFor << "was (was not?) found at index : " 
+
+		cout << "That number " << numberToSearchFor << "was (was not?) found by BINARY SEARCH at index : " 
 			<< nums.myBinarySearch(numberToSearchFor) << "\n";
 
+		std::cin.get(); 
 	}
 
 
